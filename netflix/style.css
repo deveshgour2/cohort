@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)) ,
+                    url(https://i.pinimg.com/1200x/19/8b/2f/198b2f01e73b905772279616eccc7c65.jpg);
+  background-position: center;
+  background-size: cover;
+ 
+}
+nav{
+    height: 20px;
+    width: 100%;
+    background-color: transparent;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+nav h1{
+    font-size: 45px;
+    color: red;
+}
+nav .buttons {
+    display: flex;
+    gap: 50px ;
+    
+}
+
+nav .buttons .language{
+    height: 40px;
+    width:100px;
+    padding: 10px 20px;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 15px;
+     cursor: pointer;
+}
+
+nav .buttons .signin{
+    height: 40px;
+    width: 100px;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    background-color: red;
+    border-radius: 7px;
+    border-color:none ;
+     cursor: pointer;
+}
+
+section {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+      text-align: center;
+    margin-top: 3%;
+    gap: 5px;
+}
+
+section h1{
+    font-size: 50px;
+    font-weight: 1000;
+}
+
+section h6{
+    font-size: 30px;
+    font-weight: 10;
+   
+}
+section p{
+    font-size: 20px;
+    font-weight: 10;
+}
+
+section .buttons{
+    margin: 10px;
+    display: flex;
+}
+section .buttons .email{
+    width: 400px;
+    height: 60px;
+    background-color: black;
+    border-radius: 5px;
+    border: 1px solid rgb(86, 78, 78);
+    text-align: start;
+    padding-left: 20px;
+    font-size: 20px;
+    padding: 10px 20px;
+    color: rgb(216, 205, 205);
+    
+}
+
+section .buttons .started{
+    width: 250px;
+    height: 60px;
+    background-color: red;
+    border-color: transparent;
+    border-radius: 5px;
+    font-size: 30px;
+    
+      text-align: center;
+       cursor: pointer;
+      
+}
+
+footer{
+    padding: 60px 60px;
+}
+
+footer h1{
+    font-size: 30px;
+    padding: 20px;
+}
+footer .cards{
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    gap: 30px;
+}
+footer .card1{
+    height: 250px;
+    width: 200px;
+    background-image: url(https://i.pinimg.com/control1/1200x/3f/da/6c/3fda6c5c9529b188a839145d3dabb7ed.jpg);
+    background-position: center;
+    background-size: cover;
+     border-radius: 15px;
+      cursor: pointer;
+}
+
+footer .card2{
+    height: 250px;
+    width: 200px;
+    background-image: url(https://i.pinimg.com/736x/ef/71/72/ef7172c57fe0657a1e63f07d757dd2dd.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+     cursor: pointer;
+}
+
+
+footer .card3{
+   height: 250px;
+    width: 200px;
+  background-image: url(https://i.pinimg.com/736x/b7/16/7d/b7167df800044d3d96797c89b690e45f.jpg);
+  background-position: center;
+  background-size: cover;
+     border-radius: 15px;
+      cursor: pointer;
+}
+
+
+footer .card4{
+   height: 250px;
+    width: 200px;
+  background-image: url(https://i.pinimg.com/control1/1200x/91/43/1e/91431e90916d32618810235e6f6ad645.jpg);
+    background-position: center;
+    background-size: cover;
+     border-radius: 15px;
+      cursor: pointer;
+}
+
+footer .card5{
+   height: 250px;
+    width: 200px;
+    background-image: url(https://i.pinimg.com/736x/05/e7/d8/05e7d86f493957cb517adc165c0e1a46.jpg);
+      background-position: center;
+    background-size: cover;
+     border-radius: 15px;
+      cursor: pointer;
+}
+
+
+footer .card6{
+  height: 250px;
+    width: 200px;
+    background-image: url(https://i.pinimg.com/736x/25/fb/62/25fb626ca7bdeecd05bc0dd446f83866.jpg);
+      background-position: center;
+    background-size: cover;
+     border-radius: 15px;
+      cursor: pointer;
+}
+
+
