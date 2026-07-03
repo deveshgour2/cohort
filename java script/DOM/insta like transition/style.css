@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+main{
+    height: 100%;
+    width: 100%;
+background-color: #0D1117;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.card{
+    height: 400px;
+    width: 300px;
+    background-color: white;
+  
+     position: relative;
+    
+}
+.card img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: top ;
+
+}
+
+
+.card i{
+    font-size: 60px;
+    color: #fff;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1) ;
+    opacity: 0;
+    transition: all ease 0.5s;
+}
