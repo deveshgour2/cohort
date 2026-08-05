@@ -21,7 +21,7 @@ main{
 
 section{
     height: 100%;
-    width: 400px;
+    width: 500px;
     background-color: black ;
     padding: 20px;
     margin: auto;
@@ -80,23 +80,23 @@ section{
 
 
 .bottom .user h4{
-   font-size: 20px;
+   font-size:30px;
    font-weight: 500;
    color: white;
 }
 
 .bottom .user button{
-    padding: 5px 15px;
+    padding: 5px 10px;
     background-color: transparent;
     border: 2px solid white;
-    font-size: 10px;
+    font-size: 20px;
     color: #fff;
 }
 
 .bottom .caption p{
     margin: 10px;
     padding-left: px;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: 1;
     color: white;
 }
@@ -108,7 +108,7 @@ section{
     position: absolute;
     align-items: center;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     bottom: 20%;
     right: 0%;
     padding: 15px 30px;
@@ -116,7 +116,7 @@ section{
 }
 
 .right i{
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 200;
     color: #fff;
 }
@@ -127,3 +127,48 @@ section{
     color: #fff;
 }
 
+.like h4, .like h6{
+    width: 40px;
+   
+}
+
+.right > div h4{
+    pointer-events: none;
+}
+
+.right > div h6{
+    pointer-events: none;
+}
+
+.like {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.like {
+    cursor: pointer;
+    transition: 0.3s;
+}
+.like {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.like h4 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.2);
+    transition: 0.3s;
+}
+
+.like.liked h4 {
+    background: red;
+}
+
+.like.liked i {
+    color: white;
+}
