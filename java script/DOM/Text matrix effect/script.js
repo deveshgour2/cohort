@@ -3,6 +3,7 @@ const text = p.innerText
 let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?`~"
 
 let iteration = 0
+
 function random(){
     const str = text.split("").map((char, index) => {
         if(index < iteration){
