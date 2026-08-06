@@ -36,20 +36,33 @@ body{
     padding-bottom: 10px;
     border-radius: 20px;
     background: linear-gradient(black, black) padding-box,
-                    conic-gradient(from var(--rotate), transparent,rgb(210, 26, 179),transparent, rgb(44, 5, 215), transparent, rgb(4, 231, 4),transparent) border-box ;
+                    conic-gradient(from var(--rotate), transparent,rgb(210, 26, 179),transparent) border-box ;
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    color: aliceblue;
     text-align: center;
-    border: 6px solid rgba(255, 255, 255, 0);
-    animation: borderAnimate 10s linear infinite ;
-    
+    border: 0px solid rgba(255, 255, 255, 0);
+    animation: borderAnimate 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-play-state: paused;
+    box-shadow: 0 0 0 rgb(210, 26, 179);
+    text-shadow: 0 0 0 rgba(38, 26, 210, 0.984);
+    transition: all 0.3s linear;
 }   
 
+.box:hover{
+    animation-play-state: running;
+    border-width: 5px;
+    box-shadow: 0 0 50px rgb(210, 26, 179);
+    color: rgba(230, 218, 6, 0.984);
+    text-shadow: 0 0 10px rgba(210, 44, 26, 0.984);
+}
 .box img{
     width: 100%;
 } 
 .box p{
     font-size: 1rem;
+   
 }
