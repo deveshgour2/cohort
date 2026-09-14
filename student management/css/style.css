@@ -1,0 +1,431 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    
+    background:linear-gradient(to right top, rgb(125, 172, 190), white);
+    display: grid;
+    grid-template-rows: 0.5fr 2fr 3fr;
+    grid-template-columns: 0.2fr 0.3fr 0.3fr 0.2fr;
+    grid-template-areas:"sidebar navbar navbar navbar"
+                        "sidebar classes attendance news"
+                        "sidebar classes timetable news";
+    gap: 50px;
+    padding: 100px;
+    
+}
+
+.sidebar{
+    grid-area: sidebar;
+    background-color: rgba(255, 255, 255, 0.654);
+    border-radius: 25px;
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+   padding: 50px 50px;
+}
+
+nav a{
+    display: flex;
+    align-items: center;
+    font-size: 23px;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+    gap: 13px;    
+    padding: 13px 10px;
+    padding-right: 30px;
+    color: black;
+    font-weight: 200;
+    
+}
+.sidebar h2{
+    font-size: 23px ;
+    color:rgb(6, 68, 239);
+    margin-bottom: 50px;
+    
+}
+.sidebar button{
+    background-color: rgb(7, 82, 220);
+    color: aliceblue;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    
+}
+
+.navbar{
+    grid-area: navbar;
+    background-color:transparent;
+   border-radius: 25px;
+   display: flex;
+   justify-content: space-between;
+   padding-top: 10px;
+    padding-right: 10px;
+}
+.icons{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    gap: 30px;
+}
+.greet{
+    display: flex;
+    justify-content: center;
+    flex-direction:column ;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+.greet h1{
+    font-size: 40px;
+    font-weight: 50;
+}
+
+.icons i{
+    font-size: 30px;
+    font-weight: bolder;
+    padding-top: 10px;
+    
+}
+
+
+.icons img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-position: center;
+    background-size: cover;
+}
+
+.navbar button{
+    height: 35px;
+    width: 110px;
+    border: none;
+    border-radius: 20px;
+    background-color: green;
+    color: aliceblue;
+    font-size: 15px;
+}
+
+.classes{
+    grid-area: classes;
+    background-color: rgba(255, 255, 255, 0.735);
+   border-radius: 25px;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+.heading h1{
+    font-size: 25px;
+    font-weight: 150;
+}
+.classicons{
+    display: flex;
+    gap: 20px;
+}
+.classicons i{
+    font-size: 20px;
+    font-weight: bolder;
+    color: blue;
+    background-color: rgba(87, 83, 83, 0.154);
+    border-radius: 5px;
+    padding: 4px 4px;
+}
+
+.subjects{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+.maths{
+    height: 160px;
+    width: 350px;
+    background-color: azure;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 30px;
+    border-radius: 20px;
+    gap: auto;
+}
+.classes p{
+    font-size: 16px;
+    font-weight: 100;
+    color: grey;
+    gap: 5px;
+}
+.classes h2{
+    font-size: 18px;
+    font-weight: 600;
+}
+.subheading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px ;
+   
+}
+
+.professor{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    padding-bottom: 5px;
+}
+.professor img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-position: right;
+    background-size: cover;
+}
+.physics{
+    height: 130px;
+    width: 350px;
+    background-color: azure;
+    border-radius: 20px;
+    margin: auto;
+    padding: 10px 30px ;
+}
+
+.chemistry{
+    height: 130px;
+    width: 350px;
+    background-color: azure;
+    border-radius: 20px;
+    margin: auto;
+    padding: 10px 30px ;
+}
+
+.attendance{
+    grid-area: attendance;
+    background-color: rgba(255, 255, 255, 0.735);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.heading h1{
+    font-size: 20px;
+    font-weight: 530;
+}
+.heading i{
+    font-size: 20px;
+    font-weight: bolder;
+    color: blue;
+    background-color: rgba(87, 83, 83, 0.154);
+    border-radius: 5px;
+    padding: 4px 4px;
+}
+
+.time{
+    height: 30px;
+    width: 250px;
+    border: 2px solid blue;
+    display: flex;
+    justify-content: space-between;
+    align-items:center ;
+    padding: 10px 20px ;
+    border-radius: 25px;
+    margin: 0 110px ;
+}
+.time p{
+    color: grey;
+    font-size: 12px;
+    font-weight: 0;
+}
+.lecture{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+}
+.lecture p{
+    color: grey;
+    border: 1px solid grey;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+.attendance button{
+    height: 30px;
+    width: 130px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    margin-left: 170px;
+}
+
+
+.timetable{
+    grid-area: timetable;
+    background-color:rgba(255, 255, 255, 0.735);
+   border-radius: 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.timetable .heading{
+    display: flex;
+    justify-content: space-between;
+    gap: 285px;
+}
+.month h4{
+   
+    padding-bottom: 10px;
+}
+.calendar-body{
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.calendar-body p{
+     font-size: 20px;
+    font-weight: bolder;
+    color: blue;
+    background-color: rgba(87, 83, 83, 0.154);
+    border-radius: 5px;
+    padding: 4px 10px;
+}
+.left{
+    margin-right: 30px;
+}
+.right{
+    margin-left: 30px;
+}
+.calendar{
+    height: auto;
+    width: 250px;
+    border: 1px solid gray;
+    grid-area: calendar;
+}
+.weekdays{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    padding: 10px;
+    background-color: rgba(128, 128, 128, 0.15);
+}
+.days{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    justify-content: center;
+    align-items:center ;
+}
+.days span{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px  solid gray;
+    border-right: 1px  solid gray;
+    color: gray;
+  
+    padding: 5px;
+}
+.days span:empty {
+    border-top: 1px  solid gray;
+    border-right: 1px  solid gray;
+  
+}
+
+.news{
+    grid-area: news;
+    background-color:rgba(255, 255, 255, 0.735);
+   border-radius: 25px;
+   display: flex;
+ 
+   align-items: center;
+   flex-direction: column
+}
+.news img{
+    height: 230px;
+    width: 100%;
+    margin-top: 10px;
+}
+.news h4{
+    font-size: 13px;
+    padding-right: 70px;
+    padding-top:10px ;
+}
+.news p{
+    font-size: 18px;
+    font-weight: 100;
+    color: grey;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+.news button{
+    height: 30px;
+    width: 200px;
+    background-color: blue;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    margin-top: 20px;
+}
+.des{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+   
+}
+.card1{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-bottom: 1px solid  grey;
+}
+.card1 img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding-bottom: 5px;
+      background-position: center;
+    background-size:cover;
+}
+.card1 h4{
+    padding-left: 15px;
+}
+
+.card2{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+   
+}
+.card2 h4{
+    padding-left: 15px;
+}
+
+.card2 img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding-bottom: 5px;
+    background-position: center;
+    background-size:cover;
+}
