@@ -1,0 +1,159 @@
+:root {
+    --pri: #27374D;
+    --sec: #1d415e;
+    --tri: #099dfa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 5, 38);
+    color: whitesmoke;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    height: 5rem;
+    width: 100%;
+    background-color: var(--pri);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 5rem;
+}
+
+nav .left {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.left img {
+    height: 3rem;
+    width: 3rem;
+}
+
+.left p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--tri);
+}
+
+.right {
+    font-size: 1.2rem;
+    background-color: var(--sec);
+    padding-inline: 1rem;
+    padding-block: 0.3rem;
+    border-radius: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.AddTask {
+    margin-top: 2rem;
+    width: 70%;
+    background-color: var(--sec);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    border-radius: 0.5rem;
+}
+
+.AddTask input {
+    height: 3rem;
+    width: 70%;
+    background-color: var(--pri);
+    border: none;
+    outline: none;
+    color: whitesmoke;
+    padding-inline: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.AddTask button {
+    padding-inline: 2rem;
+    padding-block: 0.8rem;
+    border-radius: 0.5rem;
+    background-color: var(--tri);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.taskbar {
+    width: 70%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.taskbar .left-taskbar,.right-taskbar {
+    display: flex;
+    gap: 1rem;
+    border: 1px solid var(--sec);
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+}
+
+.taskbar .left-taskbar p,.right-taskbar p:hover {
+    scale: 1.1;
+}
+
+
+
+.tasklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    width: 70%;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--sec);
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    
+}
+
+.task input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.task-text {
+    color: #f8fafc;
+    font-size: 1rem;
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.completed-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+}

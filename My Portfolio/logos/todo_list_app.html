@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devesh Gour | Modern Todo Workspace</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155',
+                            accent: '#06b6d4', // Cyan accent matching logo styling
+                            hover: '#0891b2',
+                            glow: 'rgba(6, 182, 212, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+
+    <!-- Header / Branding Bar -->
+    <header class="border-b border-brand-border bg-brand-card/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-lg text-white shadow-lg shadow-cyan-500/20">
+                    DG
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-wide text-white">Devesh Gour</h1>
+                    <p class="text-xs text-cyan-400 font-medium">Engineering Task Workspace</p>
+                </div>
+            </div>
+            
+            <!-- Quick Stats Badge -->
+            <div id="statsBadge" class="text-xs px-3 py-1.5 rounded-full bg-slate-800 border border-brand-border text-slate-300">
+                <span id="pendingCount" class="text-cyan-400 font-bold">0</span> tasks remaining
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl w-full mx-auto px-4 py-8 flex-grow">
+        
+        <!-- Input Task Section -->
+        <div class="bg-brand-card border border-brand-border rounded-2xl p-4 sm:p-6 mb-8 shadow-xl shadow-cyan-950/10">
+            <form id="todoForm" class="flex flex-col sm:flex-row gap-3">
+                <input 
+                    type="text" 
+                    id="taskInput" 
+                    placeholder="What needs to be done, Devesh?" 
+                    class="flex-grow bg-slate-900 border border-brand-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 text-slate-100 placeholder-slate-500 transition-colors"
+                    required
+                >
+                
+                <div class="flex gap-2">
+                    <select 
+                        id="prioritySelect" 
+                        class="bg-slate-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:border-cyan-500 transition-colors cursor-pointer"
+                    >
+                        <option value="Low">Low Priority</option>
+                        <option value="Medium" selected>Medium Priority</option>
+                        <option value="High">High Priority</option>
+                    </select>
+
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all shadow-md shadow-cyan-500/20 flex items-center gap-2 whitespace-nowrap"
+                    >
+                        <i class="fa-solid fa-plus text-xs"></i>
+                        <span>Add Task</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filter & Search Control Panel -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+            <!-- Filter Tabs -->
+            <div class="flex bg-slate-900/80 p-1 rounded-xl border border-brand-border w-full sm:w-auto">
+                <button data-filter="all" class="filter-btn active-tab flex-1 sm:flex-initial px-4 py-1.5 text-xs font-semibold rounded-lg transition-all text-cyan-400 bg-brand-card shadow">
+                    All
+                </button>
+                <button data-filter="active" class="filter-btn flex-1 sm:flex-initial px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-all">
+                    Active
+                </button>
+                <button data-filter="completed" class="filter-btn flex-1 sm:flex-initial px-4 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-slate-200 transition-all">
+                    Completed
+                </button>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button id="clearCompletedBtn" class="text-xs text-slate-400 hover:text-rose-400 px-3 py-2 rounded-lg hover:bg-slate-800/60 transition-colors flex items-center gap-1.5">
+                    <i class="fa-regular fa-trash-can"></i>
+                    <span>Clear Completed</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Todo Items Container -->
+        <div id="todoContainer" class="space-y-3 custom-scrollbar">
+            <!-- Dynamic Todo items will render here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden py-16 text-center border border-dashed border-brand-border rounded-2xl bg-brand-card/30">
+            <div class="w-12 h-12 rounded-full bg-slate-800 text-cyan-400 flex items-center justify-center mx-auto mb-3 text-lg">
+                <i class="fa-solid fa-list-check"></i>
+            </div>
+            <p class="text-slate-300 font-medium">No tasks found</p>
+            <p class="text-xs text-slate-500 mt-1">Add a new task above to get started with your workflow.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-border py-4 text-center text-xs text-slate-500 bg-brand-dark">
+        <p>&copy; 2026 Devesh Gour &bull; Built with Tailwind CSS & JavaScript</p>
+    </footer>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-brand-card border border-brand-border w-full max-w-md rounded-2xl p-6 shadow-2xl">
+            <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-cyan-400"></i> Edit Task
+            </h3>
+            <input 
+                type="text" 
+                id="editTaskInput" 
+                class="w-full bg-slate-900 border border-brand-border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 text-slate-100 mb-4"
+            >
+            <div class="mb-6">
+                <label class="block text-xs text-slate-400 mb-2">Priority Level</label>
+                <select id="editPrioritySelect" class="w-full bg-slate-900 border border-brand-border rounded-xl px-3 py-3 text-sm text-slate-300 focus:outline-none focus:border-cyan-500">
+                    <option value="Low">Low Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="High">High Priority</option>
+                </select>
+            </div>
+            <div class="flex justify-end gap-3">
+                <button id="cancelEditBtn" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+                    Cancel
+                </button>
+                <button id="saveEditBtn" class="px-5 py-2 rounded-xl text-xs font-semibold bg-cyan-500 hover:bg-cyan-600 text-white transition-colors">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // State Management
+            let todos = JSON.parse(localStorage.getItem('devesh_todos')) || [
+                { id: '1', text: 'Design custom portfolio logo mark', priority: 'High', completed: true },
+                { id: '2', text: 'Build interactive React & Tailwind dashboard', priority: 'High', completed: false },
+                { id: '3', text: 'Review Data Structures and Algorithms syllabus', priority: 'Medium', completed: false }
+            ];
+            let currentFilter = 'all';
+            let editingTodoId = null;
+
+            // DOM Elements
+            const todoForm = document.getElementById('todoForm');
+            const taskInput = document.getElementById('taskInput');
+            const prioritySelect = document.getElementById('prioritySelect');
+            const todoContainer = document.getElementById('todoContainer');
+            const emptyState = document.getElementById('emptyState');
+            const pendingCount = document.getElementById('pendingCount');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+
+            // Modal DOM Elements
+            const editModal = document.getElementById('editModal');
+            const editTaskInput = document.getElementById('editTaskInput');
+            const editPrioritySelect = document.getElementById('editPrioritySelect');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            const saveEditBtn = document.getElementById('saveEditBtn');
+
+            // Save state to Local Storage
+            function saveTodos() {
+                localStorage.setItem('devesh_todos', JSON.stringify(todos));
+                renderTodos();
+            }
+
+            // Priority Badge Colors
+            function getPriorityBadge(priority) {
+                switch (priority) {
+                    case 'High':
+                        return `<span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">High</span>`;
+                    case 'Medium':
+                        return `<span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Medium</span>`;
+                    case 'Low':
+                    default:
+                        return `<span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Low</span>`;
+                }
+            }
+
+            // Render Todos based on filter
+            function renderTodos() {
+                // Filter items
+                const filteredTodos = todos.filter(todo => {
+                    if (currentFilter === 'active') return !todo.completed;
+                    if (currentFilter === 'completed') return todo.completed;
+                    return true;
+                });
+
+                // Update Stats Badge
+                const remaining = todos.filter(t => !t.completed).length;
+                pendingCount.textContent = remaining;
+
+                // Show Empty State if empty
+                if (filteredTodos.length === 0) {
+                    todoContainer.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    return;
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+
+                // Render list
+                todoContainer.innerHTML = filteredTodos.map(todo => `
+                    <div class="group bg-brand-card hover:border-cyan-500/40 border border-brand-border rounded-xl p-4 flex items-center justify-between gap-3 transition-all ${todo.completed ? 'opacity-60 bg-slate-900/50' : ''}">
+                        <div class="flex items-center gap-3.5 flex-grow min-w-0">
+                            <button 
+                                onclick="toggleComplete('${todo.id}')"
+                                class="w-5 h-5 rounded-md border flex items-center justify-center transition-colors flex-shrink-0 ${todo.completed ? 'bg-cyan-500 border-cyan-500 text-white' : 'border-slate-600 hover:border-cyan-400'}"
+                            >
+                                ${todo.completed ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+                            </button>
+                            <span class="text-sm text-slate-200 truncate ${todo.completed ? 'line-through text-slate-500' : ''}">
+                                ${escapeHtml(todo.text)}
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            ${getPriorityBadge(todo.priority)}
+                            <div class="flex items-center gap-1 opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button 
+                                    onclick="openEditModal('${todo.id}')" 
+                                    class="p-1.5 text-slate-400 hover:text-cyan-400 hover:bg-slate-800 rounded-lg transition-colors"
+                                    title="Edit Task"
+                                >
+                                    <i class="fa-solid fa-pen text-xs"></i>
+                                </button>
+                                <button 
+                                    onclick="deleteTodo('${todo.id}')" 
+                                    class="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
+                                    title="Delete Task"
+                                >
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Escape HTML helper
+            function escapeHtml(str) {
+                return str.replace(/[&<>"']/g, (m) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                })[m]);
+            }
+
+            // Form Submit (Add Todo)
+            todoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const text = taskInput.value.trim();
+                if (!text) return;
+
+                const newTodo = {
+                    id: Date.now().toString(),
+                    text: text,
+                    priority: prioritySelect.value,
+                    completed: false
+                };
+
+                todos.unshift(newTodo);
+                taskInput.value = '';
+                saveTodos();
+            });
+
+            // Toggle Complete Status
+            window.toggleComplete = function(id) {
+                todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+                saveTodos();
+            };
+
+            // Delete Todo
+            window.deleteTodo = function(id) {
+                todos = todos.filter(t => t.id !== id);
+                saveTodos();
+            };
+
+            // Open Edit Modal
+            window.openEditModal = function(id) {
+                const todo = todos.find(t => t.id === id);
+                if (!todo) return;
+                editingTodoId = id;
+                editTaskInput.value = todo.text;
+                editPrioritySelect.value = todo.priority;
+                editModal.classList.remove('hidden');
+                editModal.classList.add('flex');
+            };
+
+            // Close Edit Modal
+            function closeModal() {
+                editingTodoId = null;
+                editModal.classList.add('hidden');
+                editModal.classList.remove('flex');
+            }
+
+            // Save Edit
+            saveEditBtn.addEventListener('click', () => {
+                const updatedText = editTaskInput.value.trim();
+                if (!updatedText || !editingTodoId) return;
+
+                todos = todos.map(t => t.id === editingTodoId ? { 
+                    ...t, 
+                    text: updatedText, 
+                    priority: editPrioritySelect.value 
+                } : t);
+
+                saveTodos();
+                closeModal();
+            });
+
+            cancelEditBtn.addEventListener('click', closeModal);
+
+            // Filter Tabs Click Logic
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active-tab', 'text-cyan-400', 'bg-brand-card', 'shadow');
+                        b.classList.add('text-slate-400');
+                    });
+                    btn.classList.add('active-tab', 'text-cyan-400', 'bg-brand-card', 'shadow');
+                    btn.classList.remove('text-slate-400');
+
+                    currentFilter = btn.getAttribute('data-filter');
+                    renderTodos();
+                });
+            });
+
+            // Clear Completed Tasks
+            clearCompletedBtn.addEventListener('click', () => {
+                todos = todos.filter(t => !t.completed);
+                saveTodos();
+            });
+
+            // Initial Render
+            renderTodos();
+        });
+    </script>
+</body>
+</html>
